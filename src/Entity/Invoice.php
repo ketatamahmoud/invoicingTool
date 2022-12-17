@@ -29,6 +29,10 @@ class Invoice
     #[ORM\ManyToOne(inversedBy: 'invoices')]
     private ?Client $client = null;
 
+    #[ORM\ManyToOne(inversedBy: 'invoices')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Service $service = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +94,18 @@ class Invoice
     public function setClient(?Client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getService(): ?Service
+    {
+        return $this->service;
+    }
+
+    public function setService(?Service $service): self
+    {
+        $this->service = $service;
 
         return $this;
     }
